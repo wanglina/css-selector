@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>reveal.js - The HTML Presentation Framework</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/my.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <p style="color: #f04e98;"><strong>Thought</strong>Works<sup style="font-size: 14px">®</sup></p>
+
+            <h2>Css selector</h2>
+
+            <p class="author">
+                <small>Created by</small>
+            <p>WANG Lina</p>
+            </p>
+        </section>
+
+        <section>
+            <section>
+                <h2>CSS selector</h2>
+                <ul>
+                    <li>id选择器（#myid）</li>
+                    <li>类选择器（.myclassname）</li>
+                    <li>标签选择器（div,h1,p）</li>
+                    <li>相邻选择器（h1+p）</li>
+                    <li>子选择器（ul > li）</li>
+                    <li>后代选择器（li a）</li>
+                    <li>通配符选择器（*）</li>
+                    <li>属性选择器（a[rel="external"]）</li>
+                    <li>伪类选择器（a:hover,li:nth-child）</li>
+                </ul>
+            </section>
+            <section>
+                <h2>CSS Weights</h2>
+                <pre>
+                    <code>
+.count {color: yellow}
+
+body header div nav ul li div p a span em {color: red}
+                    </code>
+                </pre>
+                <div style="text-align:left">
+                    <p> !important > inline > id > class > tag</p>
+
+                    <p>
+                        html标签 (1);
+                        class (10);
+                        id (100)
+                    </p>
+
+                    <p>div p 1+1 = 2</p>
+
+                    <p>span.test 1+10 = 11</p>
+
+                    <p>#id.test 100 +10 = 110</p>
+                </div>
+            </section>
+            <section>
+<div><div><div><nav><ul><li><div><p><a><span><em class="count">
+    I'm here.
+</em></span></a></p></div></li></ul></nav></div></div></div>
+                <div style="text-align: left">
+                    <p>A,B,C,D</p>
+               <small> A：如果规则是写在标签的style属性中（内联样式），则A=1，否则，A=0. 对于内联样式，由于没有选择器，所以B、C、D的值都为0，即A=1, B=0, C=0, D=0（简写为1,0,0,0）；
+               </small>
+                <small>
+                B：计算该选择器中ID的数量。（#header，0, 1, 0, 0）；
+                </small>
+                <small>
+                C：计算该选择器中伪类及其它属性的数量（包括class、属性选择器等，不包括伪元素）。 （.logo[id='site-logo']，0, 0, 2, 0）；
+                </small>
+                <small>
+                D：计算该选择器中伪元素及标签的数量。（p:first-letter ，0, 0, 0, 2）。
+                </small>
+                </div>
+                <pre>
+                    <code>
+.count {color: yellow}  0, 0, 1, 0
+body header div nav ul li div p a span em {color: red}  0, 0, 0, 11
+                    </code>
+                </pre>
+                <small>
+                    A,B,C,D四组值，从左到右，分组比较，如果A相同，比较B，如果B相同，比较C，如果C相同，比较D，如果D相同，后定义的优先。
+                </small>
+            </section>
+            <section>
+                    <pre>
+                        <code>
+                    <div id="out-div">
+                        <div id="in-dev">
+                        </div>
+                        <p id="myid">
+                        </p>
+                        <p class="myclassname">
+                        </p>
+                    </div>
+                        </code>
+                <code>
+                div #in-div     VS    #out-div div
+                .myclassname    VS    #out-div p.myclassname
+                </code>
+                <code>
+                #myid           VS    p#myid
+                .myclassname    VS    p.myclassname
+                </code>
+                    </pre>
+            </section>
+            <section>
+                <p style="color: #f04e98;">浏览器是如何读取选择器，以识别样式，并将相应的样式附于对应的HTML元素，达到美化页面的效果捏？？</p>
+            </section>
+        </section>
+
+
+        <section>
+            <section>
+                <h2>选择器从右到左的原则</h2>
+                <small>浏览器读取选择器的顺序是由右到左进行</small>
+                        <pre>
+                            <code class="css">div.nav > ul li a[title]
+                            </code>
+                        </pre>
+                <div style="text-align: left">
+                    <small>浏览器首先会尝试在HTML标签中寻找“a[title]”元素，再匹配“li和ul”，最后匹配“div.nav”</small>
+                    <br/>
+                    <small>选择器的最后一部分(a[title])</small>
+                    <small style="color: #f04e98;">关键选择器</small>
+                    <small>，它将决定你的选择器的效率</small>
+                </div>
+                <p style="color: #f04e98">如何让关键选择器更有效，性能化更高呢？</p>
+            </section>
+            <section>
+                <li>尽量避免 universal rules</li>
+                <pre>
+                <code>[hidden="true"] { ... } /* A universal rule */</code>
+                </pre>
+                <small>查找页面上的所有节点。  越具体的关键选择器，其性能越高
+                </small>
+            </section>
+            <section>
+                <li>
+                    Id-categorized 规则与 tag name 或 class 规则并行
+                <pre>
+        <code>
+            button#goButton          VS    #goButton
+            .fundation#testIcon      VS    #testIcon
+        </code>
+                </pre>
+                    <!--<div style="text-align: left">-->
+                    <!--<small>wrong:  左边的写法似乎是应该更快的，因为它的限制更多。</small>-->
+                    <!--<small>right:  id是全局唯一的，在匹配 CSS 选择器时浏览器定位到 id 是最快的，如果伴随有其他的非 id 的 selector，反而会影响匹配的效率。</small>-->
+                    <p>用相对更具体的选择器来定位一个节点往往比组合定位更加快捷</p>
+                    <!--</div>-->
+                </li>
+            </section>
+
+            <section>
+                <li>尽量避免使用 descendant selector</li>
+                <p>Child selector</p>
+                <pre>
+                <code>#toc > li {font-weight: bold}</code>
+                </pre>
+                    <!--wrong: 编译器应该是先查找 id 为“toc”的节点，然后在他的所有直接子节点中查找类型（tag）为“li”的节点-->
+                <!--right: 浏览器首先会查找页面上所有的“li”节点，然后再去做进一步的判断：如果它的父节点的 id 为“toc”，则匹配成功。-->
+
+                <p>Descendant selector</p>
+                <pre>
+                <code>#toc li {font-weight: bold}</code>
+                </pre>
+                <small>浏览器先遍历所有的“li”节点，然后步步上溯其父节点，直到 DOM 结构的根节点，如果有某个节点的 id 为“toc”，则匹配成功，继续查找下一个“li”节点。
+                </small>
+                <pre>
+<code>
+    treehead treerow treecell  VS  treehead > treerow > treecell
+</code>
+                </pre>
+                <small>如果能用 child 选择器替代就应该尽量这样去做。</small>
+
+            </section>
+
+            <section>
+                    <li>尽量减少规则数量</li>
+                <pre>
+                    <code>
+    Span[mailfolder="true"] > table > tr > td.columnClass
+    .span-mailfolder-tbl-tdCol
+                    </code>
+                </pre>
+                <div style="text-align: left; line-height: 100px;">
+                   <small> 前一种规则需要进行 6 项匹配，先找“columnClass”，再找“td”，然后是“tr”，“table”，最后是符合“mailfolder”为“true”的 span，这种效率是非常慢的。
+                   </small>
+
+                <small>如果用一个比较特殊的 class 替代（span-mailfolder-tbl-tdCol），效率会快上好几倍。
+                   </small>
+                </div>
+            </section>
+
+
+            <section>
+                <li>尽量利用 CSS 的继承机制</li>
+                <pre>
+<code>
+    Color
+    Font
+    Letter-spacing
+    Line-height
+    List-style
+    Text-align
+    Text-indent
+    Text-transform
+    White-space
+    Word-spacing
+
+
+    #bookmark > .menu-left {list-style-image: url(blah)}
+    #bookmark {list-style-image: url(blah)}
+</code>
+                </pre>
+              <small>  如果很多子节点都需要设定该 CSS 属性值，可以统一设定其父节点的该 CSS 属性，这样一来，所有的子节点再无需做额外设定，加速了 CSS 的分析效率
+              </small>
+            </section>
+            <section>
+                <p>m-site example</p>
+                <pre>
+<code>
+.REA-details-page section.description .descriptionWrapper p,
+.REA-agent_details-page section.description .descriptionWrapper p{
+    line-height: 18px;
+    padding-bottom: 10px;
+}
+</code>
+<code>
+.REA-details-page .classicproject .contactBlock ul li a span,
+.REA-details-page .signatureproject .contactBlock ul li a span,
+.REA-details-page .midtier .contactBlock ul li a span,
+.REA-details-page .signature .contactBlock ul li a span{
+    display: block;
+    position: relative;
+}
+</code>
+                </pre>
+            </section>
+        </section>
+<section>
+        <section style="vertical-align: middle; text-align: center;">
+            <h2>pseudo classes</h2>
+            <div style="display: inline-block">
+            <p>动态</p>
+           <small>
+               <li>:link</li>
+               <li>:visited</li>
+               <li>:hover</li>
+               <li>:active</li>
+               <li>:focus</li>
+
+               <a target="_blank" href="http://codepen.io/wanglina/pen/ZbOKjN?editors=110">demo</a>
+           </small>
+            </div>
+            <div style="display: inline-block">
+            <p>元素状态</p>
+            <small>
+                <li>:enabled</li>
+                <li>:disabled</li>
+                <li>:checked</li>
+                <li>:unchecked</li>
+            </small>
+            </div>
+            <div style="display: inline-block">
+            <p>nth选择器</p>
+            <small>
+                <li>:first-child :last-child</li>
+                <li>:nth-child() :nth-last-child()</li>
+                <li>:nth-of-type() :nth-last-of-type()</li>
+                <li>:first-of-type :last-of-type</li>
+                <li>:only-child :only-of-type</li>
+                <li>:empty</li>
+                <li>:not</li>
+            </small>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>pseudo elements</h2>
+           <ul>
+            <li> ::first-line</li>
+            <li>::first-letter</li>
+            <li>::before</li>
+            <li>::after</li>
+           </ul>
+        </section>
+        <section>
+            p>i:first-child {color: red}
+            <div class="pseudo-class">
+            <pre><code>
+                <p>
+                    <i>first</i>
+                    <i>second</i>
+                </p>
+            </code></pre>
+                </div>
+
+            .first-child {color: red}
+            <pre><code>
+                <p>
+                    <i class="first-child">first</i>
+                    <i>second</i>
+                </p>
+            </code></pre>
+        </section>
+        <section>
+            p:first-letter {color: red}
+            <div class="pseudo">
+            <pre><code>
+                <p>I am stephen lee.</p>
+            </code></pre>
+            </div>
+
+            .first-letter {color: red}
+            <pre><code>
+    <p><span class='first-letter'>I</span> am stephen lee.</p>
+            </code></pre>
+            伪类的效果可以通过添加一个实际的类来达到，而伪元素的效果则需要通过添加一个实际的元素才能达到。
+
+        </section>
+</section>
+        <section>
+            <h1>Thank you!</h1>
+
+        </section>
+
+    </div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'plugin/zoom-js/zoom.js', async: true},
+            {src: 'plugin/notes/notes.js', async: true}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

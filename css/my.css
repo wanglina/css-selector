@@ -1,0 +1,20 @@
+.author{
+    margin-top: 200px;
+}
+/*.css-selector{*/
+    /*text-align: left;*/
+/*}*/
+body header div nav ul li div p a span em {color: red}
+
+.count {color: yellow}
+small li{
+    text-align: left;
+}
+
+.pseudo p:first-letter {color: red}
+
+.first-letter {color: red}
+
+.pseudo-class p>i:first-child {color: red}
+
+.first-child {color: red}
